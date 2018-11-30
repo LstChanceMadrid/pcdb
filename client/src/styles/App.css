@@ -1,0 +1,91 @@
+header {
+  background: rgba(0, 0, 0, 0.75);
+  height: 3em;
+  color: white;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  position: fixed;
+  height: 3em;
+  top: 0;
+  display: flex;
+  width: 100%;
+}
+
+.nav-links-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  flex: 1 1 50%;
+}
+
+.nav-links-container a {
+  text-decoration: none;
+  color: white;
+}
+
+main {
+  background: rgba(50, 50, 50, 0.75);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer {
+  background: black;
+  color: gray;
+  text-align: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
