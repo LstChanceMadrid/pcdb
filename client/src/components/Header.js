@@ -68,7 +68,7 @@ export default class Header extends Component {
 			</div>
 
 			<Switch>
-				<Route exact path="*/username/*" component={UserNav} />
+				<Route exact path="*/:username/*" component={UserNav} />
 				
 				<Route exact path="/*" component={Nav} />
 			</Switch>

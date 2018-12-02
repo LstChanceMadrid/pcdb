@@ -16,7 +16,7 @@ export default class Content extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 
-            <Route exact path="/username/home" component={UserHome} />
+            <Route exact path="*/:username/home" component={UserHome} />
             <Route exact path="/home" component={Home} />
           </Switch>
       </main>

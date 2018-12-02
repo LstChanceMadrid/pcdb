@@ -20,15 +20,24 @@ export default class Login extends Component {
   }
 
 handleLoginButton = () => {
-  let user = this.state.user
-
+  let user = this.state
   axios.post(LOGIN_URL, {
     username : user.username,
     password : user.password
   }).then(response => {
+    if (response.data.token !== undefined) {
     localStorage.setItem('jsonwebtoken', response.data.token)
-
+    
     setAuthenticationToken(response.data.token)
+
+    window.location.href = `http://localhost:3000/hello/${user.username}/home`
+    } else {
+      this.setState({
+        user : {
+          login : 'That is an incorrect Username or Password'
+        }
+      })
+    }
   })
 }
 
@@ -44,6 +53,8 @@ handleLoginButton = () => {
         <input type="text" name="password" onChange={this.handleTextBoxChange} placeholder="Password" />
 
             <input type="submit" onClick={this.handleLoginButton} value="Log In" />
+
+            {this.state.user.login}
       </div>
     )
   }

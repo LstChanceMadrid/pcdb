@@ -28,7 +28,7 @@ const authenticate = (req, res, next) => {
         if (decoded) {
             let username = decoded.username
 
-            db.one('SELECT username FROM users Where username = $1', [username]).then(user => {
+            db.one('SELECT username FROM users WHERE username = $1', [username]).then(user => {
                 return user.username === username
             })
 
@@ -51,9 +51,6 @@ const authenticate = (req, res, next) => {
 //         console.log(e)
 //     })
 // })
-
-
-
 
 app.post('/api/register', (req, res) => {
 
@@ -84,20 +81,22 @@ app.post('/api/login', (req, res) => {
 
 	let username = req.body.username
     let password = req.body.password
-    
-	console.log('user login here')
-	db.one('SELECT username, id, password FROM users WHERE username = $1', [username]).then(user => {
-		bcrypt.compare(password, user.password).then(result => {
-			if (result) {
-				const token = jwt.sign({username : user.username}, 'placeholder')
 
-				res.json({token : token})
+	db.one('SELECT username, id, password FROM users WHERE username = $1', [username]).then(user => {
+
+		bcrypt.compare(password, user.password).then(result => {
+
+			if (result === true) {
+                const token = jwt.sign({username : user.username}, 'placeholder')
+
+                res.json({token : token})
 			} else {
 				res.json({success: false, message: 'Password is incorrect'})
 			}
-		});
+		}).catch(e => console.log(e))
 	}).catch(e => console.log(e))
 })
+
 
 
 

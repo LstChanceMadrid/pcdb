@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 
+
 export default class UserNav extends Component {
+
+
+	handleLogoutButtonClick = () => {
+		delete localStorage.jsonwebtoken
+
+	}
+
+
+
 	render() {
 		return (
 			<nav>
@@ -10,7 +20,7 @@ export default class UserNav extends Component {
 				<div className="nav-links-container">
 					<div><Link to = "/home">Home</Link></div>
 					<div><Link to = "/my-x">My X</Link></div>
-					<div><Link to = "/logout">Logout</Link></div>
+					<div><a href="/home" onClick={this.handleLogoutButtonClick}>Logout</a></div>
 				</div>
 			</nav>
 		)
