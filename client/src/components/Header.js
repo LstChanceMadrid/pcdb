@@ -11,12 +11,10 @@ export default class Header extends Component {
     return (
       <header>
           HEADER
-        <BrowserRouter>
                 <Switch>
-                    <Route exact path="*/username/*/hello" component={UserNav} />
+                    <Route exact path="*/username/*" component={UserNav} />
                     <Route exact path="/*" component={Nav} />
                 </Switch>
-        </BrowserRouter>
       </header>
     )
   }
