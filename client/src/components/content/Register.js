@@ -9,8 +9,6 @@ const REGISTER_URL = "http://localhost:5000/api/register"
 
 export default class Register extends Component {
 
-
-
     state = {
         user : {}
     }
@@ -19,14 +17,13 @@ export default class Register extends Component {
 
         this.setState({
             user : {
-            ...this.state.user,
-            [e.target.name] : e.target.value
+                ...this.state.user,
+                [e.target.name] : e.target.value
             }
         })
-
     }
 
-    handleRegisterButton = (e) => {
+    handleRegisterButton = () => {
 
         let user = this.state.user;
 

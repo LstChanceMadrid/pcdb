@@ -5,6 +5,7 @@ export default class Logout extends Component {
     return (
       <div>
         <h1>Logout</h1>
+        
       </div>
     )
   }

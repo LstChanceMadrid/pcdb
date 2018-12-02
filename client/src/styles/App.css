@@ -1,7 +1,40 @@
 header {
   background: rgba(0, 0, 0, 0.75);
-  height: 3em;
+  height: 2em;
   color: white;
+  display: flex;
+  justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+}
+
+.search-bar-container {
+	display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-bar {
+	height: 2em;
+  padding: 0 1em;
+  border: none;
+}
+
+.magnifying-glass {
+  height: 2em;
+	width: 2em;
+	background-image: url('https://banner2.kisspng.com/20180429/ufw/kisspng-computer-icons-font-awesome-magnifying-glass-clip-5ae576ee307978.7622812615249876301986.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+
+
+.nav-placeholder {
+  height: 3em;
+  width: 100%;
 }
 
 h1 {
@@ -11,10 +44,12 @@ h1 {
 
 nav {
   position: fixed;
-  height: 3em;
-  top: 0;
+  height: 2em;
+  top: 2em;
   display: flex;
   width: 100%;
+  align-items: center;
+  background: blue;
 }
 
 .nav-links-container {
@@ -28,6 +63,12 @@ nav {
   text-decoration: none;
   color: white;
 }
+
+
+
+
+
+
 
 main {
   background: rgba(50, 50, 50, 0.75);

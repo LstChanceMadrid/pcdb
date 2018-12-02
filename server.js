@@ -14,9 +14,43 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const authenticate = (req, res, next) => {
+    let authorizationHeader = req.headers['authorization']
 
+    if (!authorizationHeader) {
+        res.status(400).json({error : 'Authorization failed'})
+        return
+    }
 
+    const token = authorizationHeader.split(' ')[1]
 
+    jwt.verify(token, 'placeholder', (error, decoded) => {
+        if (decoded) {
+            let username = decoded.username
+
+            db.one('SELECT username FROM users Where username = $1', [username]).then(user => {
+                return user.username === username
+            })
+
+            if (username) {
+                next()
+            } else {
+                res.status(400).json({error : 'Nope lol'})
+            }
+        }
+    })
+}
+
+// app.post('/api/search', (req, res) => {
+//     let search = req.body.search;
+//     db.any('SELECT username FROM users', [search]).then(result => {
+//         console.log(result)
+
+//         res.json({result : result})
+//     }).catch(e => {
+//         console.log(e)
+//     })
+// })
 
 
 
@@ -33,7 +67,7 @@ app.post('/api/register', (req, res) => {
         bcrypt.hash(password, saltRounds).then(hash => {
 
             db.any('INSERT INTO users (username, firstname, lastname, email, password) VALUES ($1, $2, $3, $4, $5)', [username, firstname, lastname, email, hash])
-        }).then(user => {
+        }).then(() => {
             res.json({success : true})
         })
     }).catch(e => {
@@ -46,7 +80,24 @@ app.post('/api/register', (req, res) => {
 })
 
 
+app.post('/api/login', (req, res) => {
 
+	let username = req.body.username
+    let password = req.body.password
+    
+	console.log('user login here')
+	db.one('SELECT username, id, password FROM users WHERE username = $1', [username]).then(user => {
+		bcrypt.compare(password, user.password).then(result => {
+			if (result) {
+				const token = jwt.sign({username : user.username}, 'placeholder')
+
+				res.json({token : token})
+			} else {
+				res.json({success: false, message: 'Password is incorrect'})
+			}
+		});
+	}).catch(e => console.log(e))
+})
 
 
 
