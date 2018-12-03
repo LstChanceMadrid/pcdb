@@ -1,3 +1,5 @@
+body {}
+
 header {
   background: rgba(0, 0, 0, 0.75);
   height: 2em;
@@ -42,14 +44,17 @@ h1 {
   padding: 0;
 }
 
+
+
+
 nav {
-  position: fixed;
+  position: absolute;
   height: 2em;
   top: 2em;
   display: flex;
   width: 100%;
   align-items: center;
-  background: blue;
+  background: rgba(250, 0, 0, 0.75);
 }
 
 .nav-links-container {
@@ -79,7 +84,11 @@ main {
 
 
 
-
+.sticky {
+  position: fixed;
+  top: 0;
+  width:100%;
+}
 
 
 
@@ -120,6 +129,7 @@ footer {
   background: black;
   color: gray;
   text-align: center;
+  height: 70em;
 }
 
 @keyframes App-logo-spin {
