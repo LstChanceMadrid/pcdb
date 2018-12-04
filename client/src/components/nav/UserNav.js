@@ -20,13 +20,16 @@ export default class UserNav extends Component {
 			navBar[0].classList.remove('sticky')
 		}
 	}
+
+	let username = window.document.URL.split('#')[1]
+
 		return (
 			<nav className="nav-bar">
 				<h1>User Nav</h1>
 				
 				<div  className="nav-links-container">
-					<div><Link to = "/home">Home</Link></div>
-					<div><Link to = "/my-x">My X</Link></div>
+					<div><Link to = "#/home">Home</Link></div>
+					<div><Link to = "#/my-x">My X</Link></div>
 					<div><a href="/home" onClick={this.handleLogoutButtonClick}>Logout</a></div>
 				</div>
 			</nav>

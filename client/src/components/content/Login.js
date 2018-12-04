@@ -30,7 +30,7 @@ handleLoginButton = () => {
     
     setAuthenticationToken(response.data.token)
 
-    window.location.href = `http://localhost:3000/hello/${user.username}/home`
+    window.location.href = `http://localhost:3000/hello/#${user.username}#/home`
     } else {
       this.setState({
         user : {

@@ -10,6 +10,7 @@ export default class Nav extends Component {
 			let navBar = document.getElementsByTagName('nav')
 			console.log('hi')
 			if (window.scrollY > 30) {
+        console.log(navBar[0])
 				navBar[0].classList.add('sticky')
 		} else {
 			navBar[0].classList.remove('sticky')

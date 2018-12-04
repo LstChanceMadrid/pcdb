@@ -98,7 +98,7 @@ app.post('/api/login', (req, res) => {
 })
 
 
-
+// app.get('/api/:username/home')
 
 
 // app.post('/api/search', (req, res) => {
