@@ -89,7 +89,7 @@ app.post('/api/login', (req, res) => {
 			if (result === true) {
                 const token = jwt.sign({username : user.username}, 'placeholder')
 
-                res.json({token : token})
+                res.json({token : token, username : user.username})
 			} else {
 				res.json({success: false, message: 'Password is incorrect'})
 			}

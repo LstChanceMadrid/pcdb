@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {setAuthenticationToken} from '../../utils'
-import { connect } from 'react-redux';
 
 
 
@@ -61,13 +60,3 @@ handleLoginButton = () => {
     )
   }
 }
-
-
-const mapStateToProps = (state) => {
-  return {
-    user : state.user // access with this.props.user
-  }
-}
-
-
-export default connect()(user)

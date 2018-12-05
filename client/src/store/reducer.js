@@ -5,6 +5,12 @@ const initialState = () => {
 
 const reducer = (state = initialState, action) => {
 
+    if (action.type === "USERNAME") {
+        return {
+            ...state,
+            username : state.username
+        }
+    }
     return state
 }
 

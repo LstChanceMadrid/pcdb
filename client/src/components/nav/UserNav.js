@@ -14,6 +14,7 @@ export default class UserNav extends Component {
 		window.onscroll = () => {
 			let navBar = document.getElementsByTagName('nav')
 			console.log('hi')
+			console.log(this)
 			if (window.scrollY > 30) {
 				navBar[0].classList.add('sticky')
 		} else {
@@ -27,7 +28,7 @@ export default class UserNav extends Component {
 				
 				<div  className="nav-links-container">
 					<div><Link to = "/home">Home</Link></div>
-					<div><Link to = "#/my-x">My X</Link></div>
+					<div><Link to = "/my-x">My X</Link></div>
 					<div><a href="/home" onClick={this.handleLogoutButtonClick}>Logout</a></div>
 				</div>
 			</nav>

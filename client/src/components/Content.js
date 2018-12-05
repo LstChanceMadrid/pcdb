@@ -8,16 +8,17 @@ import Register from './content/Register'
 
 export default class Content extends Component {
   render() {
+    console.log(this.props)
     return (
       <main>
         <div className="nav-placeholder"></div>
         <h1>Content</h1>
           <Switch>
-            <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/*" component={Home} />
 
-            <Route exact path="*#/home" component={UserHome} />
-            <Route exact path="/home" component={Home} />
+            <Route exact path="#/home" component={UserHome} />
           </Switch>
       </main>
     )
