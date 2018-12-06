@@ -13,8 +13,6 @@ export default class UserNav extends Component {
 
 		window.onscroll = () => {
 			let navBar = document.getElementsByTagName('nav')
-			console.log('hi')
-			console.log(this)
 			if (window.scrollY > 30) {
 				navBar[0].classList.add('sticky')
 		} else {

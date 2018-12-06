@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 
-export default class UserHome extends Component {
+class UserHome extends Component {
 
 
   render() {
 
-
-    window.location = 
-    console.log(window.location)
-    let username = window.location.split('#')[1]
-    console.log(username)
-
-
     return (
       <div>
-        {username}
+        {this.props.username}
         <h1>User Home</h1>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    username : state.username
+  }
+}
+
+export default connect(mapStateToProps)(UserHome)

@@ -5,10 +5,13 @@ import UserHome from './content/UserHome'
 import Home from './content/Home'
 import Login from './content/Login'
 import Register from './content/Register'
+import { connect } from 'react-redux'
 
-export default class Content extends Component {
+class Content extends Component {
+  
   render() {
-    console.log(this.props)
+    console.log('inside content')
+    console.log(this.props.username)
     return (
       <main>
         <div className="nav-placeholder"></div>
@@ -18,9 +21,19 @@ export default class Content extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/*" component={Home} />
 
-            <Route exact path="#/home" component={UserHome} />
+            <Route exact path=":username/home" component={UserHome} />
           </Switch>
       </main>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  console.log('in map in content')
+  console.log(state)
+  return {
+    username : state.username
+  }
+}
+
+export default connect(mapStateToProps)(Content)
