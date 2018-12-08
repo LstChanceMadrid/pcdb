@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import * as actionCreators from '../../store/actionCreators'
+
 import axios from 'axios'
 import {setAuthenticationToken} from '../../utils'
-import {connect} from 'react-redux'
 
 
 
@@ -14,24 +16,24 @@ class Login extends Component {
 
     this.state = {
       user : {
+        username : null,
+        password : null
       }
     }
   }
 
   handleUsernameChange = (e) => {
-    this.props.onUsernameChange(e.target.value)
 
-  //   this.setState({
-  //      user: {
-  //        ...this.state.user, 
-  //        username : e.target.value
-  //      }
-  //     })  
+    this.setState({
+       user: {
+         ...this.state.user, 
+         username : e.target.value
+       }
+      })  
   }
 
 
   handlePasswordChange = (e) => {
-
 
     this.setState({
        user: {
@@ -83,9 +85,9 @@ handleLoginButton = () => {
 
         <input type="text" name="password" onChange={this.handlePasswordChange} placeholder="Password" />
 
-            <button type="submit" onClick={this.handleLoginButton}>Log In</button>
+        <button type="submit" onClick={this.handleLoginButton}>Log In</button>
 
-            {this.state.user.login}{this.props.username}
+        {this.state.user.login}{this.props.username}
       </div>
     )
   }
@@ -93,8 +95,7 @@ handleLoginButton = () => {
 
 const mapStateToProps = (state) => {
   return {
-        username : state.username
-    
+    username : state.username
   }
 }
 

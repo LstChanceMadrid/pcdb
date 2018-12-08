@@ -1,14 +1,12 @@
 
 const initialState = {
-    username : "",
-    password : ""
+    username : null,
+    password : null
 }
 
 const reducer = (state = initialState, action) => {
 
     if (action.type === "USERNAME_CHANGE") {
-        console.log('username in reducer')
-        console.log(state)
         return {
                 ...state,
                 username : state.username
@@ -25,8 +23,6 @@ const reducer = (state = initialState, action) => {
     
 
     if (action.type === "USER_LOGIN") {
-        console.log('hello')
-        console.log(state)
         return {
             ...state,
             username : state.username

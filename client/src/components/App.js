@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import Header from "./Header"
-import Content from "./Content"
+import Main from "./Main"
 import Footer from "./Footer"
+import { Switch, Route } from 'react-router-dom';
+import UserHome from './main/UserHome'
+import Home from './main/Home'
+import Login from './main/Login'
+import Register from './main/Register'
 
 class App extends Component {
 
@@ -11,8 +16,17 @@ class App extends Component {
     return (
       <div>
           <Header />
+=
+          <Main>
+          <Switch>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/*" component={Home} />
 
-          <Content />
+            <Route exact path=":username/home" component={UserHome} />
+          </Switch>
+          </Main>
+
 
           <Footer />
       </div>

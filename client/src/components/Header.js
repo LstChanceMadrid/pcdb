@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-
-import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { Route } from 'react-router-dom';
 // import Logo from './Logo'
-import Nav from './nav/Nav'
-import UserNav from './nav/UserNav'
+import Nav from './header/Nav'
+import UserNav from './header/UserNav'
+
 
 
 // const SEARCH_URL = 'http://localhost:5000/api/search'
 
 
 
-export default class Header extends Component {
+class Header extends Component {
 
 	state = {
 		search : {}
@@ -56,24 +57,40 @@ export default class Header extends Component {
 
 
 	render() {
+		let header = () => { 
+			return (
+			<div className="header">
+				<h1>Header</h1>
 
-		return (
-		<header>
-			<h1>Header</h1>
+				<div  className="search-bar-container">
+					<input className="search-bar"  type="text" onChange={this.handleSearchTextBoxOnChange} name="search" placeholder="Search" />
 
-			<div  className="search-bar-container">
-				<input className="search-bar"  type="text" onChange={this.handleSearchTextBoxOnChange} name="search" placeholder="Search" />
-
-				<input className="magnifying-glass" type="submit" onClick = {this.handleSearchButton} value="" />
+					<input className="magnifying-glass" type="submit" onClick = {this.handleSearchButton} value="" />
+				</div>
 			</div>
+			)
+		}
 
-			<Switch>
-				<Route exact path="*/:username/*" component={UserNav} />
-				
-				<Route exact path="/*" component={Nav} />
-			</Switch>
-			
-		</header>
-		)
+		if (this.props.username) {
+			return (
+				<header>
+					{header()}
+
+					<Route exact path="*/:username/*" component={UserNav} />
+				</header>
+			)
+
+		} else {
+			return (
+				<header>
+					{header()}
+					
+					<Route exact path="/*" component={Nav} />
+				</header>
+			)
+		}
 	}
 }
+
+
+export default connect()(Header)
