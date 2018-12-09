@@ -91,7 +91,8 @@ app.post('/api/login', (req, res) => {
 
                 res.json({token : token, username : user.username})
 			} else {
-				res.json({success: false, message: 'Password is incorrect'})
+                
+				res.json({token: false, message: 'Password is incorrect'})
 			}
 		}).catch(e => console.log(e))
 	}).catch(e => console.log(e))

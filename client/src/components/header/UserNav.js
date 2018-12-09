@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 
-export default class UserNav extends Component {
+class UserNav extends Component {
 
 	handleLogoutButtonClick = () => {
 		delete localStorage.jsonwebtoken
-
+		delete localStorage.username
+		delete localStorage.password
 	}
 
 	render() {
@@ -27,9 +30,13 @@ export default class UserNav extends Component {
 				<div  className="nav-links-container">
 					<div><Link to = "/home">Home</Link></div>
 					<div><Link to = "/my-x">My X</Link></div>
-					<div><a href="/home" onClick={this.handleLogoutButtonClick}>Logout</a></div>
+					<div><a href="/" onClick={this.handleLogoutButtonClick}>Logout</a></div>
 				</div>
 			</nav>
 		)
 	}
 }
+
+
+
+export default connect()(UserNav)

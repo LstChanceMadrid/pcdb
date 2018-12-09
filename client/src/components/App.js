@@ -16,15 +16,15 @@ class App extends Component {
     return (
       <div>
           <Header />
-=
-          <Main>
-          <Switch>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/*" component={Home} />
 
-            <Route exact path=":username/home" component={UserHome} />
-          </Switch>
+          <Main>
+            <Switch>
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Home} />
+
+              <Route path="/:username/home" component={UserHome} />
+            </Switch>
           </Main>
 
 

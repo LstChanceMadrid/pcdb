@@ -1,33 +1,34 @@
 
 const initialState = {
-    username : null,
-    password : null
+    user : {
+        username : null,
+        password : null
+    }
 }
 
 const reducer = (state = initialState, action) => {
 
-    if (action.type === "USERNAME_CHANGE") {
+    if (action.type === "CURRENT_USER") {
+        console.log('inside reducer')
+        console.log(action.user)
+        window.location.pathname = `/${action.user.username}/home`
         return {
-                ...state,
-                username : state.username
-            
+            user : {
+                ...state.user,
+                username : action.user.username,
+                password : action.user.password
+            }
         }
     }
 
-    if (action.type === "PASSWORD_CHANGE") {
+    if (action.type === "CLEAR_USER") {
         return {
-            ...state,
-            password : state.password
+            user : {}
         }
     }
     
 
-    if (action.type === "USER_LOGIN") {
-        return {
-            ...state,
-            username : state.username
-        }
-    }
+
     return state
 }
 

@@ -5,11 +5,6 @@ import * as actionCreators from '../../store/actionCreators'
 import axios from 'axios'
 import {setAuthenticationToken} from '../../utils'
 
-
-
-
-const LOGIN_URL = 'http://localhost:5000/api/login'
-
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -22,72 +17,46 @@ class Login extends Component {
     }
   }
 
+  componentWillUpdate = () => {
+    localStorage.setItem('username', this.state.user.username)
+    localStorage.setItem('password', this.state.user.password)
+  }
+  
   handleUsernameChange = (e) => {
-
     this.setState({
        user: {
-         ...this.state.user, 
-         username : e.target.value
-       }
-      })  
+        ...this.state.user, 
+        username : e.target.value
+      }
+    })
   }
-
 
   handlePasswordChange = (e) => {
-
     this.setState({
        user: {
-         ...this.state.user, 
-         password : e.target.value
-       }
-      })  
+        ...this.state.user, 
+        password : e.target.value
+      }
+    })  
   }
 
-handleLoginButton = () => {
-
-  this.props.onUserLogin(this.state.user.username)
-
-
-  // let user = this.state.user
-  
-  // axios.post(LOGIN_URL, {
-  //   username : user.username,
-  //   password : user.password
-  // }).then(response => {
-  //   if (response.data.token !== undefined) {
-      
-  //   localStorage.setItem('jsonwebtoken', response.data.token)
-    
-
-  //   setAuthenticationToken(response.data.token)
-    
-  //   this.props.onUserLogin(this.state.user.username)
-    
-
-  //   } else {
-  //     this.setState({
-  //       user : {
-  //         login : 'That is an incorrect Username or Password'
-  //       }
-  //     })
-  //   }
-  // })
-}
-
-
-
   render() {
+    console.log('inside login page')
+    localStorage.setItem('username', this.state.user.username)
+    localStorage.setItem('password', this.state.user.password)
+
+    console.log('the prop inside login page')
+    console.log(this.props.user)
+
     return (
       <div>
         <h1>Login</h1>
 
-        <input type="text" name="username" onChange={this.handleUsernameChange} placeholder="Username" autoFocus />
+        <input id="username" type="text" name="username" onChange={this.handleUsernameChange} placeholder="Username" autoFocus />
 
-        <input type="text" name="password" onChange={this.handlePasswordChange} placeholder="Password" />
+        <input id="password" type="text" name="password" onChange={this.handlePasswordChange} placeholder="Password" />
 
-        <button type="submit" onClick={this.handleLoginButton}>Log In</button>
-
-        {this.state.user.login}{this.props.username}
+        <button type="submit" onClick={this.props.login}>Log In</button>
       </div>
     )
   }
@@ -95,17 +64,16 @@ handleLoginButton = () => {
 
 const mapStateToProps = (state) => {
   return {
-    username : state.username
+    username : state.user.username
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+  console.log('inside dispatch')
+
   return {
-    onUsernameChange : () => dispatch({type: "USERNAME_CHANGE"}),
-    onPasswordChange : () => dispatch({type: "PASSWORD_CHANGE"}),
-    onUserLogin : () => dispatch({type: "USER_LOGIN"})
+    login : () => dispatch(actionCreators.authenticateLogin())
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

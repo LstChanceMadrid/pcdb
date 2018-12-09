@@ -12,14 +12,18 @@ import UserNav from './header/UserNav'
 
 
 class Header extends Component {
-
-	state = {
-		search : {}
+	constructor(props) {
+		super(props)
+		this.state = {
+			...this.state,
+			search : {}
+		}
 	}
 
 	handleSearchTextBoxOnChange = (e) => {
 
 		this.setState({
+			...this.state,
 			search : {
 				...this.state.search,
 				[e.target.name] : e.target.value
@@ -57,6 +61,7 @@ class Header extends Component {
 
 
 	render() {
+		console.log(this.props.user)
 		let header = () => { 
 			return (
 			<div className="header">
@@ -71,12 +76,12 @@ class Header extends Component {
 			)
 		}
 
-		if (this.props.username) {
+		if (localStorage.getItem('jsonwebtoken')) {
 			return (
 				<header>
 					{header()}
 
-					<Route exact path="*/:username/*" component={UserNav} />
+					<Route path="/:username/" component={UserNav} />
 				</header>
 			)
 
@@ -92,5 +97,12 @@ class Header extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		user : {
+			username : state.user.username
+		}
+	}
+}
 
-export default connect()(Header)
+export default connect(mapStateToProps)(Header)
