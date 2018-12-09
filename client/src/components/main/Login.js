@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import * as actionCreators from '../../store/actionCreators'
 
-import axios from 'axios'
-import {setAuthenticationToken} from '../../utils'
+import * as actionCreators from '../../store/actionCreators'
 
 class Login extends Component {
   constructor(props) {
@@ -41,12 +39,8 @@ class Login extends Component {
   }
 
   render() {
-    console.log('inside login page')
     localStorage.setItem('username', this.state.user.username)
     localStorage.setItem('password', this.state.user.password)
-
-    console.log('the prop inside login page')
-    console.log(this.props.user)
 
     return (
       <div>
@@ -69,7 +63,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('inside dispatch')
 
   return {
     login : () => dispatch(actionCreators.authenticateLogin())

@@ -1,38 +1,31 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import * as actionCreators from '../../store/actionCreators'
 
 
 
-const REGISTER_URL = "http://localhost:5000/api/register"
 
-
-
-
-export default class Register extends Component {
+class Register extends Component {
 
     state = {
         user : {}
     }
 
-    handleTextBoxChange = (e) => {
+    componentWillUpdate = () => {
+        localStorage.setItem('username', this.state.user.username)
+        localStorage.setItem('firstname', this.state.user.firstname)
+        localStorage.setItem('lastname', this.state.user.lastname)
+        localStorage.setItem('email', this.state.user.email)
+        localStorage.setItem('password', this.state.user.password)
+      }
 
+    handleTextBoxChange = (e) => {
         this.setState({
             user : {
                 ...this.state.user,
                 [e.target.name] : e.target.value
             }
-        })
-    }
-
-    handleRegisterButton = () => {
-
-        let user = this.state.user;
-
-        fetch(REGISTER_URL, {
-            method : "POST",
-            headers : {
-                "Content-Type" : "application/json"
-            },
-            body : JSON.stringify(user)
         })
     }
 
@@ -42,6 +35,12 @@ export default class Register extends Component {
 
 
   render() {
+      localStorage.setItem('username', this.state.user.username)
+      localStorage.setItem('firstname', this.state.user.firstname)
+      localStorage.setItem('lastname', this.state.user.lastname)
+      localStorage.setItem('email', this.state.user.email)
+      localStorage.setItem('password', this.state.user.password)
+      
     return (
       <div>
         <h1>Register</h1>
@@ -56,9 +55,23 @@ export default class Register extends Component {
 
             <input type="text" name="password" onChange={this.handleTextBoxChange} placeholder="Password" />
 
-            <input type="submit" onClick={this.handleRegisterButton} value="Register" />
+            <input type="submit" onClick={this.props.register} value="Register" />
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        username : state.user.username
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register : () => dispatch(actionCreators.registerUser())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

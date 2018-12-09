@@ -2,19 +2,33 @@
 import axios from 'axios'
 import setAuthenticationToken from '../utils'
 
+const REGISTER_URL = "http://localhost:5000/api/register"
 const LOGIN_URL = 'http://localhost:5000/api/login'
 
 export const currentUser = (user) => {
     return {
         type : "CURRENT_USER",
         user
-
     }
 }
 
-export const clearUser = () => {
-    return {
-        type : "CLEAR_USER"
+export const registerUser = () => {
+
+    return dispatch => {
+        axios.post(REGISTER_URL, {
+            username : localStorage.username,
+            firstname : localStorage.firstname ,
+            lastname : localStorage.lastname ,
+            email : localStorage.email ,
+            password : localStorage.password 
+        }).then(response => {
+            if (response.data.success === true) {
+                localStorage.removeItem('firstname')
+                localStorage.removeItem('lastname')
+                localStorage.removeItem('email')
+                dispatch(authenticateLogin())
+            }
+        })
     }
 }
 

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
 
 
 class UserNav extends Component {
+	constructor(props) {
+		super(props)
+	}
 
 	handleLogoutButtonClick = () => {
 		delete localStorage.jsonwebtoken
@@ -28,8 +30,8 @@ class UserNav extends Component {
 				<h1>User Nav</h1>
 				
 				<div  className="nav-links-container">
-					<div><Link to = "/home">Home</Link></div>
-					<div><Link to = "/my-x">My X</Link></div>
+					<div><Link to = {`/${this.props.user.username}/home`}>Home</Link></div>
+					<div><Link to = "/:username/my-x">My X</Link></div>
 					<div><a href="/" onClick={this.handleLogoutButtonClick}>Logout</a></div>
 				</div>
 			</nav>
@@ -37,6 +39,12 @@ class UserNav extends Component {
 	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		user : {
+			username : state.username
+		}
+	}
+}
 
-
-export default connect()(UserNav)
+export default connect(mapStateToProps)(UserNav)

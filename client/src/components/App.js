@@ -12,26 +12,42 @@ import Register from './main/Register'
 class App extends Component {
 
   render() {
-
-    return (
-      <div>
-          <Header />
-
-          <Main>
-            <Switch>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={Home} />
-
-              <Route path="/:username/home" component={UserHome} />
-            </Switch>
-          </Main>
-
-
-          <Footer />
-      </div>
-    );
-  }
+    if (localStorage.getItem('jsonwebtoken')) {
+      return (
+        <div>
+            <Header />
+  
+            <Main>
+              <Switch>
+                <Route path="/:username/home" component={UserHome} />
+              </Switch>
+            </Main>
+  
+  
+            <Footer />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+            <Header />
+  
+            <Main>
+              <Switch>
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/" component={Home} />
+                <Route path="/*" component={Home} />
+              </Switch>
+            </Main>
+  
+  
+            <Footer />
+        </div>
+      );
+    }
+    }
+    
 }
 
 export default App;

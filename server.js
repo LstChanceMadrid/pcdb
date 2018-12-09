@@ -53,7 +53,8 @@ const authenticate = (req, res, next) => {
 // })
 
 app.post('/api/register', (req, res) => {
-
+    console.log('register server')
+    
     let username = req.body.username
     let firstname = req.body.firstname
     let lastname = req.body.lastname
@@ -61,12 +62,15 @@ app.post('/api/register', (req, res) => {
     let password = req.body.password
 
     db.none("SELECT username FROM users WHERE username = $1", [username]).then(() => {
+        console.log('register server after do none')
         bcrypt.hash(password, saltRounds).then(hash => {
 
             db.any('INSERT INTO users (username, firstname, lastname, email, password) VALUES ($1, $2, $3, $4, $5)', [username, firstname, lastname, email, hash])
         }).then(() => {
-            res.json({success : true})
-        })
+
+            const token = jwt.sign({username : username}, 'placeholder')
+            res.json({success : true, token : token, username : username})
+        }).catch(e => console.log(e))
     }).catch(e => {
         if (e.name = "QueryResultError") {
             res.json({success : false, message : 'Username exists'})
@@ -78,7 +82,7 @@ app.post('/api/register', (req, res) => {
 
 
 app.post('/api/login', (req, res) => {
-
+    console.log('login server')
 	let username = req.body.username
     let password = req.body.password
 
@@ -89,13 +93,19 @@ app.post('/api/login', (req, res) => {
 			if (result === true) {
                 const token = jwt.sign({username : user.username}, 'placeholder')
 
-                res.json({token : token, username : user.username})
+                res.json({success : true, token : token, username : user.username})
 			} else {
                 
-				res.json({token: false, message: 'Password is incorrect'})
+				res.json({success: false, message: 'Password is incorrect'})
 			}
 		}).catch(e => console.log(e))
-	}).catch(e => console.log(e))
+	}).catch(e => {
+        if (e.name = "QueryResultError") {
+            res.json({success : false, message : 'Username exists'})
+        } else {
+            console.log(e)
+        }
+    })
 })
 
 

@@ -2,10 +2,20 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
 class UserHome extends Component {
+  constructor(props) {
+    super(props)
+
+  }
+
+  componentDidMount = () => {
+    localStorage.removeItem('password')
+    localStorage.removeItem('firstname')
+    localStorage.removeItem('lastname')
+    localStorage.removeItem('email')
+  }
 
 
   render() {
-
     return (
       <div>
         {this.props.username}
