@@ -29,42 +29,57 @@ class Register extends Component {
         })
     }
 
-
-
-
-
-
-  render() {
-      localStorage.setItem('username', this.state.user.username)
-      localStorage.setItem('firstname', this.state.user.firstname)
-      localStorage.setItem('lastname', this.state.user.lastname)
-      localStorage.setItem('email', this.state.user.email)
-      localStorage.setItem('password', this.state.user.password)
+    render() {
+        localStorage.setItem('username', this.state.user.username)
+        localStorage.setItem('firstname', this.state.user.firstname)
+        localStorage.setItem('lastname', this.state.user.lastname)
+        localStorage.setItem('email', this.state.user.email)
+        localStorage.setItem('password', this.state.user.password)
       
-    return (
-      <div>
-        <h1>Register</h1>
-        <div>
-            <input type="text" name="username" onChange={this.handleTextBoxChange} placeholder="Username" autoFocus />
+        return (
+            <div>
+                <h1>Register</h1>
 
-            <input type="text" name="firstname" onChange={this.handleTextBoxChange} placeholder="First Name" />
+                <div className="register-form-container">
+                    <div className="input-container">
+                        <label className="register-label">Username:</label>
+                        <input className="register-input" type="text" name="username" onChange={this.handleTextBoxChange} placeholder="Username" autoFocus />
+                    </div>
 
-            <input type="text" name="lastname" onChange={this.handleTextBoxChange} placeholder="Last Name" />
+                    <div className="input-container">
+                        <label className="register-label">First Name:</label>
+                        <input className="register-input" type="text" name="firstname" onChange={this.handleTextBoxChange} placeholder="First Name" />
+                    </div>
 
-            <input type="email" name="email" onChange={this.handleTextBoxChange} placeholder="Email" />
+                    <div className="input-container">
+                        <label className="register-label">Last Name:</label>
+                        <input className="register-input" type="text" name="lastname" onChange={this.handleTextBoxChange} placeholder="Last Name" />
+                    </div>
 
-            <input type="text" name="password" onChange={this.handleTextBoxChange} placeholder="Password" />
+                    <div className="input-container">
+                        <label className="register-label">Email:</label>
+                        <input className="register-input" type="email" name="email" onChange={this.handleTextBoxChange} placeholder="Email" />
+                    </div>
 
-            <input type="submit" onClick={this.props.register} value="Register" />
-        </div>
-      </div>
-    )
-  }
+                    <div className="input-container">
+                        <label className="register-label">Password:</label>
+                        <input className="register-input" type="text" name="password" onChange={this.handleTextBoxChange} placeholder="Password" />
+                    </div>
+
+                    <div className="input-container">
+                        <input type="submit" onClick={this.props.register} value="Register" />
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (state) => {
     return {
-        username : state.user.username
+        user : {
+            username : state.user.username
+        }
     }
 }
 

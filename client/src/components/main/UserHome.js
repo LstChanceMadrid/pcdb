@@ -18,7 +18,7 @@ class UserHome extends Component {
   render() {
     return (
       <div>
-        {this.props.username}
+        {this.props.user.username}
         <h1>User Home</h1>
       </div>
     )
@@ -27,7 +27,9 @@ class UserHome extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    username : state.username
+    user : {
+      username : state.user.username
+    }
   }
 }
 

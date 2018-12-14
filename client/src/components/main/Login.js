@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 import * as actionCreators from '../../store/actionCreators'
 
+
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -14,6 +15,8 @@ class Login extends Component {
       }
     }
   }
+
+
 
   componentWillUpdate = () => {
     localStorage.setItem('username', this.state.user.username)
@@ -58,7 +61,9 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    username : state.user.username
+    user : {
+      username : state.user.username
+    }
   }
 }
 

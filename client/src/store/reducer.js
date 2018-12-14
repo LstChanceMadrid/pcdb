@@ -1,3 +1,6 @@
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
 
 const initialState = {
     user : {
@@ -9,16 +12,21 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
     if (action.type === "CURRENT_USER") {
-        window.location.pathname = `/${action.user.username}/home`
+        // window.location.pathname = `/${action.user.username}/home`
         return {
             user : {
-                ...state.user,
-                username : action.user.username,
-                password : action.user.password
-            }
+               ...state.user,
+               username : action.user.username,
+           }
+       }
+    }
+
+    if (action.type === "REMOVE_USER") {
+        return {
+            user : action.user
         }
     }
-    
+
     return state
 }
 

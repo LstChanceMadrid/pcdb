@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux';
+import * as actionCreators from '../../store/actionCreators'
 
 
 class UserNav extends Component {
 	constructor(props) {
 		super(props)
-	}
-
-	handleLogoutButtonClick = () => {
-		delete localStorage.jsonwebtoken
-		delete localStorage.username
-		delete localStorage.password
 	}
 
 	render() {
@@ -31,8 +26,8 @@ class UserNav extends Component {
 				
 				<div  className="nav-links-container">
 					<div><Link to = {`/${this.props.user.username}/home`}>Home</Link></div>
-					<div><Link to = "/:username/my-x">My X</Link></div>
-					<div><a href="/" onClick={this.handleLogoutButtonClick}>Logout</a></div>
+					<div><Link to = {`/${this.props.user.username}/my-cart`}>My Cart</Link></div>
+					<div onClick={this.props.logout}><Link to ="/" >Logout</Link></div>
 				</div>
 			</nav>
 		)
@@ -42,9 +37,15 @@ class UserNav extends Component {
 const mapStateToProps = (state) => {
 	return {
 		user : {
-			username : state.username
+			username : state.user.username
 		}
 	}
 }
 
-export default connect(mapStateToProps)(UserNav)
+const mapDispatchToProps = dispatch => {
+	return {
+		logout : () => dispatch(actionCreators.logout())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserNav)

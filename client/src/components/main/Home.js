@@ -9,6 +9,10 @@ class Home extends Component {
     return (
       <div>
         <h1>Home</h1>
+
+        <div>
+          <h2>rugby ball pictures</h2>
+        </div>
       </div>
     )
   }

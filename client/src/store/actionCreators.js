@@ -12,6 +12,13 @@ export const currentUser = (user) => {
     }
 }
 
+export const removeUser = (user) => {
+    return {
+        type : "REMOVE_USER",
+        user
+    }
+}
+
 export const registerUser = () => {
 
     return dispatch => {
@@ -60,5 +67,15 @@ export const authenticateLogin = () => {
                 localStorage.removeItem('password')
             }
         })
+    }
+}
+
+export const logout = () => {
+    delete localStorage.jsonwebtoken
+    delete localStorage.username
+    delete localStorage.password
+    return dispatch => {
+        let user = {}
+        dispatch(removeUser(user))
     }
 }
